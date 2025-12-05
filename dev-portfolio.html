@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #e05a25;
+            --primary-light: #e05a25;
+            --secondary: #e05a25;
+            --accent: #f59e0b;
+            --bg: #faf2ec;
+            --bg-card: #ffffff;
+            --text: #e78585;
+            --text-light: #101216;
+            --border: #e2e8f0;
+            --gradient: linear-gradient(135deg, #f0bc6e 0%, #e05a25 100%);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Scroll Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(250, 251, 252, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .social-links a:hover svg {
+            fill: white;
+        }
+
+        .social-links svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text);
+            transition: fill 0.3s;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--gradient);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .profile-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card .role {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .profile-card .bio {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+        }
+
+        .tech-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tech-category h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tech-category h4::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .tech-tag {
+            padding: 0.5rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        .tech-tag:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            height: 200px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech span {
+            padding: 0.3rem 0.75rem;
+            background: var(--bg);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-links .github-link {
+            background: var(--text);
+            color: white;
+        }
+
+        .project-links .github-link:hover {
+            background: var(--primary);
+        }
+
+        .project-links .demo-link {
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .project-links .demo-link:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Contact */
+        .contact-section {
+            text-align: center;
+            padding: 6rem 0;
+        }
+
+        .contact-box {
+            background: var(--gradient);
+            border-radius: 24px;
+            padding: 4rem;
+            color: white;
+        }
+
+        .contact-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-box p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-link:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .contact-link svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .profile-stats {
+                gap: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-box {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#tech">Tech Stack</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="social-links">
+                <a href="https://github.com/your-username" target="_blank" title="GitHub">
+                    <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <a href="https://notion.so/your-page" target="_blank" title="Notion">
+                    <svg viewBox="0 0 24 24"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 2.012c-.466-.373-.746-.652-1.586-.56L3.619 2.41c-.466.047-.56.28-.373.466l1.213 1.332zm.793 3.082v13.935c0 .746.373 1.026 1.213.98l14.568-.84c.84-.047.932-.56.932-1.166V6.477c0-.606-.234-.933-.746-.886l-15.248.88c-.56.047-.72.326-.72.82zM18.5 7.65c.093.42 0 .84-.42.886l-.746.14v10.31c-.653.326-1.26.513-1.766.513-.84 0-1.073-.233-1.68-.98l-5.14-8.053v7.79l1.54.327s0 .84-1.166.84l-3.22.186c-.093-.186 0-.653.326-.746l.84-.233v-10.31l-1.166-.093c-.093-.42.14-.98.793-1.026l3.454-.234 5.327 8.147V8.163l-1.26-.14c-.093-.514.28-.886.746-.933zM2.24 1.49l13.09-.933c1.586-.14 2.006-.047 3.012.747l4.153 2.91c.7.514.933.653.933 1.213v15.215c0 .98-.373 1.586-1.68 1.68l-15.528.933c-.98.047-1.446-.093-1.96-.746l-3.134-4.06c-.56-.747-.793-1.307-.793-1.96V3.37c0-.84.373-1.54 1.446-1.633l.466-.093z"/></svg>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="about">
+            <div class="hero-content">
+                <div class="hero-text reveal">
+                    <h1><span>Win With Won</span></h1>
+                    <p>
+                        안정적이고 확장 가능한 서버 아키텍처를 설계하고,<br>
+                        효율적인 API를 개발하는 것을 좋아합니다.<br>
+                        새로운 기술을 배우고 문제를 해결하는 과정에서 성장합니다.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            프로젝트 보기
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">연락하기</a>
+                    </div>
+                </div>
+                
+                <!-- Profile Card -->
+                <div class="profile-card reveal">
+                    <div class="profile-image">👨‍💻</div>
+                    <h3>Jeong ji won</h3>
+                    <p class="role">Backend Developer</p>
+                    <p class="bio">
+                        Java & Spring 기반의 백엔드 개발자입니다.<br>
+                        클린 코드와 협업의 책임감을 중요하게 생각합니다.
+                    </p>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <!-- <div class="stat-value"></div> -->
+                            <!-- <div class="stat-label">Years Exp</div> -->
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">2</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">5+</div>
+                            <div class="stat-label">Tech Stack</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section id="tech">
+            <p class="section-title reveal">Skills</p>
+            <h2 class="section-heading reveal">Tech Stack</h2>
+            
+            <div class="tech-stack reveal">
+                <div class="tech-categories">
+                    <div class="tech-category">
+                        <h4>Backend</h4>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">Spring Security</span>
+                            <span class="tech-tag">JPA</span>
+                            <span class="tech-tag">MyBatis</span>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Database</h4>
+                        <div class="tech-tags">
+                            <span class="tech-tag">MySQL</span>
+                            <!-- <span class="tech-tag">PostgreSQL</span> -->
+                            <span class="tech-tag">Redis</span>
+                            <!-- <span class="tech-tag">MongoDB</span> -->
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h4>DevOps</h4>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Git</span>
+                            <!-- <span class="tech-tag">Jenkins</span> -->
+                            <span class="tech-tag">Linux</span>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Tools & others</h4>
+                        <div class="tech-tags">
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">eclipse</span>
+                            <span class="tech-tag">IntelliJ</span>
+                            <span class="tech-tag">Javascript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <p class="section-title reveal">Work</p>
+            <h2 class="section-heading reveal">Projects</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <div class="project-image">🛒</div>
+                    <div class="project-content">
+                        <h3>E-Commerce API</h3>
+                        <p>Spring Boot 기반 쇼핑몰 REST API. 상품 관리, 주문, 결제 시스템을 구현했습니다.</p>
+                        <div class="project-tech">
+                            <span>Spring Boot</span>
+                            <span>JPA</span>
+                            <span>MySQL</span>
+                            <span>Redis</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/your-username/project1" class="github-link" target="_blank">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                GitHub
+                            </a>
+                            <a href="#" class="demo-link">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image">💬</div>
+                    <div class="project-content">
+                        <h3>Real-time Chat</h3>
+                        <p>WebSocket을 활용한 실시간 채팅 애플리케이션. 1:1 채팅 및 그룹 채팅 기능을 지원합니다.</p>
+                        <div class="project-tech">
+                            <span>Spring Boot</span>
+                            <span>WebSocket</span>
+                            <span>MongoDB</span>
+                            <span>Docker</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/your-username/project2" class="github-link" target="_blank">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                GitHub
+                            </a>
+                            <a href="#" class="demo-link">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="project-card reveal">
+                    <div class="project-image">📊</div>
+                    <div class="project-content">
+                        <h3>Dashboard API</h3>
+                        <p>관리자 대시보드 백엔드 API. 사용자 관리, 통계, 리포트 기능을 제공합니다.</p>
+                        <div class="project-tech">
+                            <span>Spring Boot</span>
+                            <span>PostgreSQL</span>
+                            <span>JWT</span>
+                            <span>AWS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/your-username/project3" class="github-link" target="_blank">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                GitHub
+                            </a>
+                            <a href="#" class="demo-link">Live Demo</a>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="contact-box reveal">
+                <h2>함께 일해요!</h2>
+                <p>새로운 기회와 협업에 항상 열려있습니다. 편하게 연락주세요.</p>
+                <div class="contact-links">
+                    <a href="https://github.com/jiwon6978/jiwon6978.git" class="contact-link" target="_blank">
+                        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                    <a href="https://www.notion.so/e157b059ba3d4511a7eab8876069c1f9" class="contact-link" target="_blank">
+                        <svg viewBox="0 0 24 24"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 2.012c-.466-.373-.746-.652-1.586-.56L3.619 2.41c-.466.047-.56.28-.373.466l1.213 1.332zm.793 3.082v13.935c0 .746.373 1.026 1.213.98l14.568-.84c.84-.047.932-.56.932-1.166V6.477c0-.606-.234-.933-.746-.886l-15.248.88c-.56.047-.72.326-.72.82zM18.5 7.65c.093.42 0 .84-.42.886l-.746.14v10.31c-.653.326-1.26.513-1.766.513-.84 0-1.073-.233-1.68-.98l-5.14-8.053v7.79l1.54.327s0 .84-1.166.84l-3.22.186c-.093-.186 0-.653.326-.746l.84-.233v-10.31l-1.166-.093c-.093-.42.14-.98.793-1.026l3.454-.234 5.327 8.147V8.163l-1.26-.14c-.093-.514.28-.886.746-.933zM2.24 1.49l13.09-.933c1.586-.14 2.006-.047 3.012.747l4.153 2.91c.7.514.933.653.933 1.213v15.215c0 .98-.373 1.586-1.68 1.68l-15.528.933c-.98.047-1.446-.093-1.96-.746l-3.134-4.06c-.56-.747-.793-1.307-.793-1.96V3.37c0-.84.373-1.54 1.446-1.633l.466-.093z"/></svg>
+                        Notion
+                    </a>
+                    <a href="mailto:jjiioonnee6978@gmail.com" class="contact-link">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        Email
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Your Name. All rights reserved.</p>
+    </footer>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        // Reveal animation on scroll
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('load', reveal);
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
+
