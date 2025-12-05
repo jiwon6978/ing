@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonang Interior - 로그인</title>
+    <link rel="stylesheet" href="../../../../../style.css">
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <main>
+        <div class="auth-container">
+            <div class="auth-box">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">로그인</button>
+                    <button class="auth-tab" data-tab="register">회원가입</button>
+                </div>
+
+                <!-- 로그인 폼 -->
+                <form id="login-form" class="auth-form active">
+                    <h2>로그인</h2>
+                    <div class="form-group">
+                        <label for="login-username">사용자명</label>
+                        <input type="text" id="login-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">비밀번호</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">로그인</button>
+                    <p class="auth-message" id="login-message"></p>
+                </form>
+
+                <!-- 회원가입 폼 -->
+                <form id="register-form" class="auth-form">
+                    <h2>회원가입</h2>
+                    <div class="form-group">
+                        <label for="reg-username">사용자명 *</label>
+                        <input type="text" id="reg-username" name="username" required minlength="3" maxlength="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">이메일 *</label>
+                        <input type="email" id="reg-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">비밀번호 *</label>
+                        <input type="password" id="reg-password" name="password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-name">이름</label>
+                        <input type="text" id="reg-name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-phone">전화번호</label>
+                        <input type="tel" id="reg-phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-address">주소</label>
+                        <input type="text" id="reg-address" name="address">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">회원가입</button>
+                    <p class="auth-message" id="register-message"></p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="../../../../../script.js"></script>
+    <script src="../../../../../auth.js"></script>
+</body>
+
+</html>
+

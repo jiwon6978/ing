@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonang Interior - Reservation</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <main>
+        <div class="reservation container fade-in">
+            <div class="page-header">
+                <h1>Book a Consultation</h1>
+                <p>Let's discuss your vision and how we can bring it to life.</p>
+            </div>
+
+            <div class="reservation-content">
+                <form class="reservation-form">
+                    <div class="form-group">
+                        <label htmlFor="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label htmlFor="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label htmlFor="date">Preferred Date</label>
+                        <input type="date" id="date" name="date">
+                    </div>
+
+                    <div class="form-group">
+                        <label htmlFor="service">Service Type</label>
+                        <select id="service" name="service">
+                            <option value="residential">Residential Design</option>
+                            <option value="commercial">Commercial Space</option>
+                            <option value="renovation">Renovation</option>
+                            <option value="consultation">General Consultation</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label htmlFor="message">Message (Optional)</label>
+                        <textarea id="message" name="message" rows="5"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary submit-btn">Request Consultation</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="/script.js"></script>
+</body>
+
+</html>
